@@ -1,14 +1,14 @@
 import mysql.connector
 
-# Connect to MySQL
+# Connecting to MySQL
 conn = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="MySql@123"  # <-- replace with your password
+    password="MySql@123"  
 )
 cursor = conn.cursor()
 
-# Create database and table if not exist
+# Create database and table 
 cursor.execute("CREATE DATABASE IF NOT EXISTS expense_tracker")
 cursor.execute("USE expense_tracker")
 cursor.execute("""
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS expenses (
 )
 """)
 
-# Function to add expense
+# To add expense
 def add_expense():
     title = input("Enter expense title: ")
     amount = float(input("Enter amount: "))
@@ -33,7 +33,7 @@ def add_expense():
     conn.commit()
     print("Expense added successfully!")
 
-# Function to view all expenses
+# view all expenses
 def view_expenses():
     cursor.execute("SELECT * FROM expenses")
     expenses = cursor.fetchall()
