@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -7,20 +8,25 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background-image: url("https://images.pexels.com/photos/27920274/pexels-photo-27920274.jpeg?cs=srgb&dl=pexels-jakubzerdzicki-27920274.jpg&fm=jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+
 .container {
     background: white;
-    padding: 40px;
-    width: 400px;
+    padding: 80px 50px;
+    width: 500px;
     text-align: center;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
+
 
 .container h1 {
     font-size: 32px;
@@ -33,11 +39,6 @@ body {
     margin-bottom: 30px;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
 
 .btn {
     text-decoration: none;
@@ -46,6 +47,8 @@ body {
     font-size: 16px;
     font-weight: 600;
     transition: 0.3s ease;
+    cursor: pointer;
+    border: none;
 }
 
 .primary {
@@ -66,6 +69,35 @@ body {
     background: #667eea;
     color: white;
 }
+
+.edit {
+    background: #38a169;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.edit:hover {
+    background: #2f855a;
+}
+
+.delete {
+    background: #e53e3e;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.delete:hover {
+    background: #c53030;
+}
+
+
 .expense-form {
     display: flex;
     flex-direction: column;
@@ -79,12 +111,14 @@ body {
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 15px;
+    width: 100%;
 }
 
 .expense-form textarea {
     resize: none;
     height: 80px;
 }
+
 
 .back-link {
     display: inline-block;
@@ -96,4 +130,28 @@ body {
 
 .back-link:hover {
     text-decoration: underline;
+}
+
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.expense-table th,
+.expense-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.expense-table th {
+    background: #667eea;
+    color: white;
+}
+
+.total {
+    margin-top: 20px;
+    color: #333;
 }

@@ -11,23 +11,39 @@
         <h1>➕ Add Expense</h1>
         <p class="subtitle">Enter your expense details below</p>
 
-        <form class="expense-form">
-            <input type="number" placeholder="Amount (₹)" required>
+        <!-- IMPORTANT: method POST + name attributes -->
+        <form method="POST" class="expense-form">
 
-            <select required>
+            <input
+                type="number"
+                name="amount"
+                placeholder="Amount (₹)"
+                required
+            >
+
+            <select name="category" required>
                 <option value="">Select Category</option>
-                <option>Food</option>
-                <option>Transport</option>
-                <option>Shopping</option>
-                <option>Bills</option>
-                <option>Other</option>
+                <option value="Food">Food</option>
+                <option value="Transport">Transport</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Other">Other</option>
             </select>
 
-            <input type="date" required>
+            <input
+                type="date"
+                name="date"
+                required
+            >
 
-            <textarea placeholder="Note (optional)"></textarea>
+            <textarea
+                name="note"
+                placeholder="Note (optional)"
+            ></textarea>
 
-            <button type="submit" class="btn primary">Save Expense</button>
+            <button type="submit" class="btn primary">
+                Save Expense
+            </button>
         </form>
 
         <a href="/" class="back-link">⬅ Back to Home</a>

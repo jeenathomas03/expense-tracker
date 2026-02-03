@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Expense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Edit Expense</h1>
+    <p class="subtitle">Modify the details of your expense below</p>
+
+    <form method="POST" class="expense-form">
+        <!-- Amount & Category in same row -->
+        <div class="form-row">
+            <div>
+                <label>Amount (₹)</label>
+                <input type="number" name="amount" value="{{ expense['amount'] }}" required>
+            </div>
+
+            <div>
+                <label>Category</label>
+                <input type="text" name="category" value="{{ expense['category'] }}" required>
+            </div>
+        </div>
+
+        <!-- Date & Note in same row -->
+        <div class="form-row">
+            <div>
+                <label>Date</label>
+                <input type="date" name="date" value="{{ expense['date'] }}" required>
+            </div>
+
+            <div>
+                <label>Note</label>
+                <textarea name="note">{{ expense['note'] }}</textarea>
+            </div>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn primary">Update Expense</button>
+    </form>
+
+    <a href="{{ url_for('view_expenses') }}" class="back-link">⬅ Back to Expenses</a>
+</div>
+
+</body>
+</html>
