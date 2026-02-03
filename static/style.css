@@ -66,3 +66,34 @@ body {
     background: #667eea;
     color: white;
 }
+.expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.expense-form input,
+.expense-form select,
+.expense-form textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.expense-form textarea {
+    resize: none;
+    height: 80px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
