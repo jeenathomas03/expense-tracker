@@ -1,10 +1,43 @@
-
+                                 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Segoe UI", sans-serif;
 }
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+    width: 100%;
+    justify-content: space-between; /* left: welcome, right: logout */
+    align-items: center;
+    padding: 20px;
+    position: sticky; /* stays on top */
+    top: 0;
+    background-color: transparent; /* transparent navbar */
+    z-index: 1000;
+}
+
+.navbar-left {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #f3efef; /* adjust text color */
+}
+
+.navbar-right .logout-btn {
+    text-decoration: none;
+    color: white;
+    background-color: rgba(138, 47, 10, 0.8); /* semi-transparent red */
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-right .logout-btn:hover {
+    background-color: rgba(9, 178, 184, 0.9);
+}
+
 
 body {
     height: 100vh;

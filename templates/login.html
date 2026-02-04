@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login / Sign Up</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            width: 320px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 10px;
+            color: #667eea;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        function showSignup() {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("signup").style.display = "block";
+        }
+
+        function showLogin() {
+            document.getElementById("signup").style.display = "none";
+            document.getElementById("login").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+
+<div class="box">
+
+    <!-- LOGIN -->
+    <div id="login">
+        <h2>Login</h2>
+        <form method="POST" action="/login">
+            <input name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button>Login</button>
+        </form>
+        <div class="link" onclick="showSignup()">Don't have an account? Sign up</div>
+    </div>
+
+    <!-- SIGNUP -->
+    <div id="signup" style="display:none;">
+        <h2>Sign Up</h2>
+        <form method="POST" action="/signup">
+            <input name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button>Create Account</button>
+        </form>
+        <div class="link" onclick="showLogin()">Already have an account? Login</div>
+    </div>
+
+</div>
+
+</body>
+</html>

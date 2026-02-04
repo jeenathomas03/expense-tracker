@@ -7,6 +7,16 @@
 </head>
 <body>
 
+    <!-- ---------- NAVBAR ---------- -->
+    <nav class="navbar">
+        <div class="navbar-left">
+            Welcome, {{ session['user'] }} 👋
+        </div>
+        <div class="navbar-right">
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
     <div class="container">
         <h1>💰 Expense Tracker</h1>
         <p class="subtitle">
