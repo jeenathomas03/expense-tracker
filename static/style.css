@@ -7,16 +7,21 @@
 }
 
 /* ---------- NAVBAR ---------- */
+/* ---------- NAVBAR ---------- */
 .navbar {
     width: 100%;
-    justify-content: space-between; /* left: welcome, right: logout */
+    display: flex;   /* ⭐ THIS WAS MISSING */
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    position: sticky; /* stays on top */
+    padding: 20px 40px;
+    position: fixed;   /* Better than sticky for your layout */
     top: 0;
-    background-color: transparent; /* transparent navbar */
+    left: 0;
+    background: rgba(253, 251, 251, 0.4); /* glass dark navbar */
+    backdrop-filter: blur(8px);
     z-index: 1000;
 }
+
 
 .navbar-left {
     font-size: 1rem;
@@ -198,46 +203,3 @@ body {
     color: #333;
 }
 
-
-/* -----past month expenses----- */
-
-body {
-    font-family: Arial;
-    background: #f5f7fa;
-}
-
-.container {
-    width: 700px;
-    margin: auto;
-    margin-top: 40px;
-}
-
-h2 {
-    text-align: center;
-}
-
-.total-box {
-    background: #19192c;
-    color: white;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-}
-
-th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-}
-
-th {
-    background: #19192c;
-    color: white;
-}

@@ -207,42 +207,5 @@ if __name__ == "__main__":
     create_table()  
     app.run(debug=True)
 
-from flask import Flask, render_template
-import sqlite3
-from datetime import datetime, date
 
-app = Flask(__name__)
-
-# Database connection
-def get_db():
-    return sqlite3.connect("expenses.db")
-
-
-@app.route("/past-month")
-def past_month():
-
-    conn = get_db()
-    cursor = conn.cursor()
-
-    today = date.today()
-
-    # First day of last month
-    first_day_last_month = date(today.year, today.month - 1, 1) if today.month > 1 else date(today.year - 1, 12, 1)
-
-    # Last day of last month
-    last_day_last_month = date(today.year, today.month, 1) - datetime.resolution
-
-    cursor.execute("""
-        SELECT title, amount, date 
-        FROM expenses
-        WHERE date BETWEEN ? AND ?
-    """, (first_day_last_month, last_day_last_month))
-
-    expenses = cursor.fetchall()
-
-    total = sum(exp[1] for exp in expenses)
-
-    conn.close()
-
-    return render_template("past_month.html", expenses=expenses, total=total)
 
