@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Past Month Expenses</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container" style="width:700px;">
+    <h1>📅 Expenses - {{ month }}</h1>
+
+    {% if expenses %}
+    <table class="expense-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Amount (₹)</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.date }}</td>
+                <td>{{ expense.category }}</td>
+                <td>{{ expense.amount }}</td>
+                <td>{{ expense.note or "-" }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="total">Total Spent: ₹ {{ total }}</h3>
+
+    {% else %}
+        <p>No expenses found for this month.</p>
+    {% endif %}
+
+    <a href="/expenses" class="back-link">⬅ Back to Expenses</a>
+
+</div>
+
+</body>
+</html>

@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 import sqlite3
+from datetime import datetime, timedelta
+
 
 app = Flask(__name__)
 app.secret_key = "secret123"   
@@ -211,6 +213,51 @@ def delete_expense(expense_id):
     conn.commit()
     conn.close()
     return redirect("/expenses")
+
+
+
+
+@app.route("/past-month")
+def past_month_expenses():
+    if "user" not in session:
+        return redirect("/login")
+
+    username = session["user"]
+
+    # Get today's date
+    today = datetime.today()
+
+    # First day of current month
+    first_day_current_month = today.replace(day=1)
+
+    # Last day of previous month
+    last_day_previous_month = first_day_current_month - timedelta(days=1)
+
+    # First day of previous month
+    first_day_previous_month = last_day_previous_month.replace(day=1)
+
+    start_date = first_day_previous_month.strftime("%Y-%m-%d")
+    end_date = last_day_previous_month.strftime("%Y-%m-%d")
+
+    conn = get_db_connection()
+
+    expenses = conn.execute("""
+        SELECT * FROM expenses 
+        WHERE username = ? AND date BETWEEN ? AND ?
+        ORDER BY date DESC
+    """, (username, start_date, end_date)).fetchall()
+
+    conn.close()
+
+    total = sum(expense["amount"] for expense in expenses)
+
+    return render_template(
+        "past_month.html",
+        expenses=expenses,
+        total=total,
+        month=first_day_previous_month.strftime("%B %Y")
+    )
+
 
 # __________ RUN __________
 
