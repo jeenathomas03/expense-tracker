@@ -2,15 +2,17 @@ from flask import Flask, render_template, request, redirect, session
 import sqlite3
 
 app = Flask(__name__)
-app.secret_key = "secret123"   # needed for login session
+app.secret_key = "secret123"   
 
-# ---------- DATABASE CONNECTION ----------
+# __________ DATABASE CONNECTION __________
+
 def get_db_connection():
     conn = sqlite3.connect("expenses.db")
     conn.row_factory = sqlite3.Row
     return conn
 
-# ---------- CREATE TABLES ----------
+# __________ CREATE TABLES __________
+
 def create_table():
     conn = get_db_connection()
     conn.execute("""
@@ -33,7 +35,8 @@ def create_table():
     conn.commit()
     conn.close()
 
-# ---------- LOGIN ----------
+# __________ LOGIN __________
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -55,7 +58,8 @@ def login():
 
     return render_template("login.html")
 
-# ---------- SIGN UP ----------
+# __________ SIGN UP __________
+
 @app.route("/signup", methods=["POST"])
 def signup():
     username = request.form["username"]
@@ -75,7 +79,8 @@ def signup():
 
     return redirect("/login")
  
- # ---------- DASHBOARD ----------
+ # __________ DASHBOARD __________
+
 @app.route("/dashboard")
 def dashboard():
     if "user" not in session:
@@ -83,20 +88,23 @@ def dashboard():
     return f"<h1>Welcome {session['user']} 🎉</h1><a href='/logout'>Logout</a>"
 
 
-# ---------- LOGOUT ----------
+# __________ LOGOUT __________
+
 @app.route("/logout")
 def logout():
     session.pop("user", None)
     return redirect("/login")
 
-# ---------- HOME ----------
+# __________ HOME __________
+
 @app.route("/")
 def home():
     if "user" not in session:
         return redirect("/login")
     return render_template("index.html")
 
-# ---------- ADD EXPENSE ----------
+# __________ ADD EXPENSE __________
+
 @app.route("/add", methods=["GET", "POST"])
 def add_expense():
     if "user" not in session:
@@ -122,7 +130,8 @@ def add_expense():
     return render_template("add_expense.html")
 
 
-# ---------- VIEW EXPENSES ----------
+# __________ VIEW EXPENSES __________
+
 @app.route("/expenses")
 def view_expenses():
     if "user" not in session:
@@ -145,8 +154,8 @@ def view_expenses():
         total=total
     )
 
+# __________ EDIT __________
 
-# ---------- EDIT ----------
 @app.route("/edit/<int:expense_id>", methods=["GET", "POST"])
 def edit_expense(expense_id):
     if "user" not in session:
@@ -180,7 +189,8 @@ def edit_expense(expense_id):
     conn.close()
     return render_template("edit_expense.html", expense=expense)
 
-# ---------- DELETE ----------
+# __________ DELETE __________
+
 @app.route("/delete/<int:expense_id>")
 def delete_expense(expense_id):
     if "user" not in session:
@@ -202,7 +212,8 @@ def delete_expense(expense_id):
     conn.close()
     return redirect("/expenses")
 
-# ---------- RUN ----------
+# __________ RUN __________
+
 if __name__ == "__main__":
     create_table()  
     app.run(debug=True)

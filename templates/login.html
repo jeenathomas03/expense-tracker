@@ -2,48 +2,113 @@
 <html>
 <head>
     <title>Login / Sign Up</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: Arial;
-            background: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
+        body {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+            url("https://png.pngtree.com/thumb_back/fh260/background/20230706/pngtree-money-and-coins-calculator-tracking-income-and-expenses-with-3d-rendering-image_3804538.jpg");
+
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        /* Glass style box */
         .box {
-            background: white;
-            padding: 30px;
-            width: 320px;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width:480px;
+            padding:60px;
+
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            transition: 0.4s;
+        }
+
+        .box:hover{
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
         }
 
         h2 {
-            text-align: center;
+            text-align:center;
+            margin-bottom:20px;
+            color:white;
+            font-weight:600;
         }
 
         input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            width:100%;
+            padding:12px;
+            margin:12px 0;
+
+            border:none;
+            outline:none;
+            border-radius:8px;
+
+            background: rgba(255,255,255,0.2);
+            color:white;
+            font-size:15px;
+        }
+
+        input::placeholder{
+            color:#eee;
+        }
+
+        input:focus{
+            background: rgba(255,255,255,0.3);
         }
 
         button {
-            width: 100%;
-            padding: 10px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 5px;
+            width:100%;
+            padding:12px;
+            margin-top:10px;
+
+            border:none;
+            border-radius:8px;
+
+            background: linear-gradient(45deg,#667eea,#764ba2);
+            color:white;
+            font-size:16px;
+            font-weight:600;
+
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            transform:scale(1.03);
+            box-shadow:0 5px 15px rgba(0,0,0,0.3);
         }
 
         .link {
-            text-align: center;
-            margin-top: 10px;
-            color: #667eea;
-            cursor: pointer;
+            text-align:center;
+            margin-top:18px;
+            color:#fff;
+            font-size:14px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .link:hover{
+            text-decoration: underline;
+            color:#dcdcff;
         }
     </style>
 
@@ -59,6 +124,7 @@
         }
     </script>
 </head>
+
 <body>
 
 <div class="box">
