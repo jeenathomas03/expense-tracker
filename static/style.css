@@ -16,7 +16,7 @@
     position: fixed;   
     top: 0;
     left: 0;
-    background: rgba(253, 251, 251, 0.4); 
+    background: rgba(247, 248, 248, 0.4); 
     backdrop-filter: blur(8px);
     z-index: 1000;
 }
@@ -32,14 +32,14 @@
     text-decoration: none;
     color: white;
     background-color: rgba(138, 47, 10, 0.8); 
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
 .navbar-right .logout-btn:hover {
-    background-color: rgba(9, 178, 184, 0.9);
+    background-color: rgba(184, 15, 9, 0.9);
 }
 
 
