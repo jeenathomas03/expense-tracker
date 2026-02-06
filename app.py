@@ -133,7 +133,6 @@ def add_expense():
 
 
 # __________ VIEW EXPENSES __________
-
 @app.route("/expenses")
 def view_expenses():
     if "user" not in session:
@@ -141,11 +140,28 @@ def view_expenses():
 
     username = session["user"]
 
+    # ⭐ Get current month range
+    today = datetime.today()
+    first_day = today.replace(day=1)
+
+    # Last day of current month
+    if today.month == 12:
+        last_day = today.replace(year=today.year + 1, month=1, day=1) - timedelta(days=1)
+    else:
+        last_day = today.replace(month=today.month + 1, day=1) - timedelta(days=1)
+
     conn = get_db_connection()
-    expenses = conn.execute(
-        "SELECT * FROM expenses WHERE username = ? ORDER BY date DESC",
-        (username,)
-    ).fetchall()
+
+    expenses = conn.execute("""
+        SELECT * FROM expenses 
+        WHERE username = ? AND date BETWEEN ? AND ?
+        ORDER BY date DESC
+    """, (
+        username,
+        first_day.strftime("%Y-%m-%d"),
+        last_day.strftime("%Y-%m-%d")
+    )).fetchall()
+
     conn.close()
 
     total = sum(expense["amount"] for expense in expenses)
