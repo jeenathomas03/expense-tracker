@@ -7,7 +7,15 @@
 <body>
 
 <div class="container" style="width:700px;">
+
     <h1>📅 Expenses - {{ month }}</h1>
+
+    <!-- ⭐ Month Selection Form -->
+    <form method="GET" style="margin-bottom:20px; text-align:center;">
+        <label style="font-weight:bold;">Select Month:</label>
+        <input type="month" name="month" required>
+        <button type="submit" class="btn primary">View</button>
+    </form>
 
     {% if expenses %}
     <table class="expense-table">

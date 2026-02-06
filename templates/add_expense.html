@@ -6,19 +6,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
     <div class="container">
         <h1>➕ Add Expense</h1>
         <p class="subtitle">Enter your expense details below</p>
 
         <form method="POST" class="expense-form">
 
-            <input
-                type="number"
-                name="amount"
-                placeholder="Amount (₹)"
-                required
-            >
+            <input type="number"
+                   name="amount"
+                   placeholder="Amount (₹)"
+                   required>
 
             <select name="category" required>
                 <option value="">Select Category</option>
@@ -29,17 +26,13 @@
                 <option value="Other">Other</option>
             </select>
 
-            <input
-                type="date"
-                name="date"
-                required
-            >
+            <input type="date"
+                   name="date"
+                   required>
 
-            <textarea
-                name="note"
-                placeholder="Note (optional)"
-            ></textarea>
-
+            <textarea name="note"
+                      placeholder="Note (optional)">
+            </textarea>
             <button type="submit" class="btn primary">
                 Save Expense
             </button>

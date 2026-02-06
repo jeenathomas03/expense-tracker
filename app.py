@@ -215,8 +215,6 @@ def delete_expense(expense_id):
     return redirect("/expenses")
 
 
-
-
 @app.route("/past-month")
 def past_month_expenses():
     if "user" not in session:
@@ -224,20 +222,26 @@ def past_month_expenses():
 
     username = session["user"]
 
-    # Get today's date
+    selected_month = request.args.get("month")
+
     today = datetime.today()
 
-    # First day of current month
-    first_day_current_month = today.replace(day=1)
+    # ⭐ If user selects month from UI
+    if selected_month:
+        selected_date = datetime.strptime(selected_month, "%Y-%m")
+        start_date = selected_date.replace(day=1)
 
-    # Last day of previous month
-    last_day_previous_month = first_day_current_month - timedelta(days=1)
+        # last day of selected month
+        if selected_date.month == 12:
+            end_date = selected_date.replace(year=selected_date.year+1, month=1, day=1) - timedelta(days=1)
+        else:
+            end_date = selected_date.replace(month=selected_date.month+1, day=1) - timedelta(days=1)
 
-    # First day of previous month
-    first_day_previous_month = last_day_previous_month.replace(day=1)
-
-    start_date = first_day_previous_month.strftime("%Y-%m-%d")
-    end_date = last_day_previous_month.strftime("%Y-%m-%d")
+    # ⭐ Default → previous month
+    else:
+        first_day_current_month = today.replace(day=1)
+        end_date = first_day_current_month - timedelta(days=1)
+        start_date = end_date.replace(day=1)
 
     conn = get_db_connection()
 
@@ -245,7 +249,9 @@ def past_month_expenses():
         SELECT * FROM expenses 
         WHERE username = ? AND date BETWEEN ? AND ?
         ORDER BY date DESC
-    """, (username, start_date, end_date)).fetchall()
+    """, (username,
+          start_date.strftime("%Y-%m-%d"),
+          end_date.strftime("%Y-%m-%d"))).fetchall()
 
     conn.close()
 
@@ -255,9 +261,8 @@ def past_month_expenses():
         "past_month.html",
         expenses=expenses,
         total=total,
-        month=first_day_previous_month.strftime("%B %Y")
+        month=start_date.strftime("%B %Y")
     )
-
 
 # __________ RUN __________
 
