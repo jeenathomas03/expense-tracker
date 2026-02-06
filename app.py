@@ -132,7 +132,6 @@ def add_expense():
     return render_template("add_expense.html")
 
 
-# __________ VIEW EXPENSES __________
 @app.route("/expenses")
 def view_expenses():
     if "user" not in session:
@@ -166,11 +165,16 @@ def view_expenses():
 
     total = sum(expense["amount"] for expense in expenses)
 
+    # ⭐ Add this line
+    month_name = today.strftime("%B %Y")
+
     return render_template(
         "view_expenses.html",
         expenses=expenses,
-        total=total
+        total=total,
+        month=month_name
     )
+
 
 # __________ EDIT __________
 
