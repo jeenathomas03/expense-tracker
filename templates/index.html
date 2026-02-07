@@ -20,12 +20,14 @@
     <div class="container">
         <h1>💰 Expense Tracker</h1>
         <p class="subtitle">
-            Track your daily expenses and manage your money smartly
-        </p>
+            Track your daily expenses and manage your expense smartly</P>
 
         <div class="buttons">
             <a href="/add" class="btn primary">➕ Add Expense</a><br>
-            <a href="/expenses" class="btn secondary">📊 View Expenses</a>
+            <a href="/expenses" class="btn secondary">View Expenses</a><br>
+            <a href="{{ url_for('monthly_graph') }}" class="btn secondary">
+                📊 Monthly Graph
+            </a>            
         </div>
     </div>
 

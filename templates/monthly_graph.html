@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Expense Graph</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container" style="width:700px;">
+    <h1>📊 Monthly Expense Graph</h1>
+
+    <canvas id="expenseChart"></canvas>
+
+    <br>
+    <a href="/" class="back-link">⬅ Back to Home</a>
+</div>
+
+<script>
+    const months = {{ months | tojson }};
+    const totals = {{ totals | tojson }};
+
+    const ctx = document.getElementById('expenseChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Monthly Expenses (₹)',
+                data: totals,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

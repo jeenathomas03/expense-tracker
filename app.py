@@ -278,11 +278,45 @@ def past_month_expenses():
         month=start_date.strftime("%B %Y")
     )
 
+# __________PAST MONTH EXPENSES__________
+
+@app.route("/monthly-graph")
+def monthly_graph():
+    if "user" not in session:
+        return redirect("/login")
+
+    username = session["user"]
+
+    conn = get_db_connection()
+
+    expenses = conn.execute("""
+        SELECT date, amount FROM expenses
+        WHERE username = ?
+    """, (username,)).fetchall()
+
+    conn.close()
+
+    monthly_data = {}
+
+    for exp in expenses:
+        month = datetime.strptime(exp["date"], "%Y-%m-%d").strftime("%B %Y")
+
+        if month not in monthly_data:
+            monthly_data[month] = 0
+
+        monthly_data[month] += exp["amount"]
+
+    months = list(monthly_data.keys())
+    totals = list(monthly_data.values())
+
+    return render_template(
+        "monthly_graph.html",
+        months=months,
+        totals=totals
+    )
+
 # __________ RUN __________
 
 if __name__ == "__main__":
     create_table()  
     app.run(debug=True)
-
-
-
