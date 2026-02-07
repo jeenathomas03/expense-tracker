@@ -117,8 +117,7 @@ def add_expense():
         category = request.form["category"]
         date = request.form["date"]
         note = request.form["note"]
-        username = session["user"]   # ⭐ logged-in user
-
+        username = session["user"]   
         conn = get_db_connection()
         conn.execute(
             "INSERT INTO expenses (amount, category, date, note, username) VALUES (?, ?, ?, ?, ?)",
@@ -131,6 +130,7 @@ def add_expense():
 
     return render_template("add_expense.html")
 
+# __________VIEW EXPENSES__________
 
 @app.route("/expenses")
 def view_expenses():
@@ -139,11 +139,9 @@ def view_expenses():
 
     username = session["user"]
 
-    # ⭐ Get current month range
     today = datetime.today()
     first_day = today.replace(day=1)
 
-    # Last day of current month
     if today.month == 12:
         last_day = today.replace(year=today.year + 1, month=1, day=1) - timedelta(days=1)
     else:
@@ -165,7 +163,6 @@ def view_expenses():
 
     total = sum(expense["amount"] for expense in expenses)
 
-    # ⭐ Add this line
     month_name = today.strftime("%B %Y")
 
     return render_template(
@@ -174,7 +171,6 @@ def view_expenses():
         total=total,
         month=month_name
     )
-
 
 # __________ EDIT __________
 
@@ -185,14 +181,13 @@ def edit_expense(expense_id):
 
     conn = get_db_connection()
 
-    # ⭐ Only allow editing if this expense belongs to the logged-in user
     expense = conn.execute(
         "SELECT * FROM expenses WHERE id=? AND username=?", 
         (expense_id, session["user"])
     ).fetchone()
     if not expense:
         conn.close()
-        return "Unauthorized", 403  # 🚫 Stop here if user is not owner
+        return "Unauthorized", 403  
 
     if request.method == "POST":
         amount = request.form["amount"]
@@ -220,20 +215,20 @@ def delete_expense(expense_id):
 
     conn = get_db_connection()
 
-    # ⭐ Only allow deleting if this expense belongs to the logged-in user
     expense = conn.execute(
         "SELECT * FROM expenses WHERE id=? AND username=?", 
         (expense_id, session["user"])
     ).fetchone()
     if not expense:
         conn.close()
-        return "Unauthorized", 403  # 🚫 Stop here if user is not owner
+        return "Unauthorized", 403 
 
     conn.execute("DELETE FROM expenses WHERE id = ?", (expense_id,))
     conn.commit()
     conn.close()
     return redirect("/expenses")
 
+# __________PAST MONTH EXPENSES__________
 
 @app.route("/past-month")
 def past_month_expenses():
@@ -246,18 +241,17 @@ def past_month_expenses():
 
     today = datetime.today()
 
-    # ⭐ If user selects month from UI
     if selected_month:
         selected_date = datetime.strptime(selected_month, "%Y-%m")
         start_date = selected_date.replace(day=1)
 
-        # last day of selected month
+        
         if selected_date.month == 12:
             end_date = selected_date.replace(year=selected_date.year+1, month=1, day=1) - timedelta(days=1)
         else:
             end_date = selected_date.replace(month=selected_date.month+1, day=1) - timedelta(days=1)
 
-    # ⭐ Default → previous month
+   
     else:
         first_day_current_month = today.replace(day=1)
         end_date = first_day_current_month - timedelta(days=1)
