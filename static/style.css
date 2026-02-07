@@ -6,7 +6,8 @@
     font-family: "Segoe UI", sans-serif;
 }
 
-/* __________ NAVBAR __________ */
+/* __________NAVBAR(index)__________ */
+
 .navbar {
     width: 100%;
     display: flex;  
@@ -20,7 +21,6 @@
     backdrop-filter: blur(8px);
     z-index: 1000;
 }
-
 
 .navbar-left {
     font-size: 1rem;
@@ -42,6 +42,7 @@
     background-color: rgba(184, 15, 9, 0.9);
 }
 
+/*___________index-body___________*/
 
 body {
     height: 100vh;
@@ -54,7 +55,7 @@ body {
     justify-content: center;
 }
 
-/* __________CONTAINERS__________ */
+/* __________BOX-CONTAINERS__________ */
 
 .container {
     background: rgba(255, 255, 255, 0.75);
@@ -68,12 +69,15 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/*___________BUTTON___________*/
+
 .buttons {
     display: flex;
     flex-direction: column;
     gap: 2px;  
 }
 
+/*___________CONTAINERS-HEADING___________*/
 
 .container h1 {
     font-size: 32px;
@@ -81,11 +85,14 @@ body {
     color: #333;
 }
 
+/*___________SUBTITLES___________*/
+
 .subtitle {
     color: #666;
     margin-bottom: 30px;
 }
 
+/*___________CONTAINERS-BUTTONS___________*/
 
 .btn {
     text-decoration: none;
@@ -104,7 +111,7 @@ body {
 }
 
 .primary:hover {
-    background: #2d47b9;
+    background: #b2bae4;
 }
 
 .secondary {
@@ -117,33 +124,7 @@ body {
     color: white;
 }
 
-.edit {
-    background: #38a169;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 14px;
-    margin-right: 5px;
-}
-
-.edit:hover {
-    background: #2f855a;
-}
-
-.delete {
-    background: #e53e3e;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.delete:hover {
-    background: #c53030;
-}
-
+/*___________ADD-EXPENSE-FORM___________*/
 
 .expense-form {
     display: flex;
@@ -166,6 +147,7 @@ body {
     height: 80px;
 }
 
+/*___________BACKLINKS___________*/
 
 .back-link {
     display: inline-block;
@@ -179,6 +161,33 @@ body {
     text-decoration: underline;
 }
 
+/*___________EDIT & DELETE(view_expenses)___________*/
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn.edit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn.edit:hover {
+    background-color: #3e8e41;
+}
+
+.btn.delete {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn.delete:hover {
+    background-color: #c0392b;
+}
+
+/*___________PAST EXPENSES___________*/
 
 .expense-table {
     width: 100%;
@@ -202,4 +211,3 @@ body {
     margin-top: 20px;
     color: #333;
 }
-
