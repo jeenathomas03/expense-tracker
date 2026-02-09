@@ -2,28 +2,28 @@
 <html>
 <head>
     <title>Monthly Expense Graph</title>
-
+    <!--Loads Chart.js library("Without this Graph won’t work")-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <!--external css-->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
+<!--Main Container-->
 <div class="container" style="width:700px;">
     <h1>📊 Monthly Expense Graph</h1>
-
+    <!--This is where graph is drawn-->
     <canvas id="expenseChart"></canvas>
-
     <br>
+    <!--Link to Back-->
     <a href="/" class="back-link">⬅ Back to Home</a>
 </div>
-
+<!--Getting Data From Flask-->
 <script>
     const months = {{ months | tojson }};
     const totals = {{ totals | tojson }};
-
+    //Selecting Canvas Context
     const ctx = document.getElementById('expenseChart').getContext('2d');
-
+    //Creating Chart
     new Chart(ctx, {
         type: 'bar',
         data: {
