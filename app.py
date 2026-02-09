@@ -1,9 +1,11 @@
+# Import libraries
 from flask import Flask, render_template, request, redirect, session
 import sqlite3
 from datetime import datetime, timedelta
 
 
 app = Flask(__name__)
+# Secret key is used for session encryption
 app.secret_key = "secret123"   
 
 # __________ DATABASE CONNECTION __________
@@ -17,6 +19,7 @@ def get_db_connection():
 
 def create_table():
     conn = get_db_connection()
+    # Users table stores login credentials
     conn.execute("""
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,6 +27,7 @@ def create_table():
             password TEXT NOT NULL
         )
     """)
+    # Expenses table stores user expense records
     conn.execute("""
         CREATE TABLE IF NOT EXISTS expenses (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
