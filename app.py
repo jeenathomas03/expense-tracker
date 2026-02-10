@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, redirect, session
 import sqlite3
 from datetime import datetime, timedelta
 
-
 app = Flask(__name__)
 # Secret key is used for session encryption
 app.secret_key = "secret123"   
@@ -92,7 +91,6 @@ def dashboard():
     if "user" not in session:
         return redirect("/login")
     return f"<h1>Welcome {session['user']} 🎉</h1><a href='/logout'>Logout</a>"
-
 
 # __________ LOGOUT __________
 
